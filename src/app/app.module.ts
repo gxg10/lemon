@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
