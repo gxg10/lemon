@@ -8,6 +8,8 @@ import { Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component';
+import { AuthService } from '../auth/auth.service';
+import { AuthGuard } from '../auth/auth-guard';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.componen
     CommonModule,
     ManagerRoutingModule,
     MaterialModule
-  ]
+  ],
+  providers: [AuthGuard, AuthService]
 })
 export class ManagerModule {
  }

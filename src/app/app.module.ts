@@ -12,11 +12,16 @@ import { UserModule } from './user/user.module';
 import { MaterialModule } from './material.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { AuthService } from './auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SimpleDialogComponent } from './common/simple-dialog/simple-dialog.component';
+import { UiService } from './common/ui.service';
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
+import { NavigationmenuComponent } from './navigationmenu/navigationmenu.component';
+import { AuthGuard } from './auth/auth-guard';
 
 
 @NgModule({
@@ -24,7 +29,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SimpleDialogComponent,
+    NavigationmenuComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     FlexLayoutModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, UiService, AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true,
+  },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
